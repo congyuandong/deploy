@@ -23,6 +23,6 @@ handler.on('error', function (err) {
 })
 
 handler.on('push', function (event) {
-  console.log(event);
+  console.log(event.payload);
   run_cmd('sh', ['./deploy-io.sh'], function(text){ console.log(text) });
 })
