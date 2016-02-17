@@ -1,7 +1,6 @@
 var http = require('http');
 var createHandler = require('github-webhook-handler');
-var handlerIO = createHandler({ path: '/io', secret: 'congyuandong' });
-var handlerSelf = createHandler({ path: '/self', secret: 'congyuandong' });
+var handler = createHandler({ path: '/', secret: 'congyuandong' });
 
 function run_cmd(cmd, args, callback) {
   var spawn = require('child_process').spawn;
@@ -13,29 +12,17 @@ function run_cmd(cmd, args, callback) {
 }
 
 http.createServer(function (req, res) {
-  handlerIO(req, res, function (err) {
-    res.statusCode = 404
-    res.end('no such location')
-  });
-  handlerSelf(req, res, function (err) {
+  handler(req, res, function (err) {
     res.statusCode = 404
     res.end('no such location')
   });
 }).listen(7777)
 
-handlerIO.on('error', function (err) {
+handler.on('error', function (err) {
   console.error('Error:', err.message);
 })
 
-handlerIO.on('push', function (event) {
+handler.on('push', function (event) {
+  console.log(event);
   run_cmd('sh', ['./deploy-io.sh'], function(text){ console.log(text) });
 })
-
-handlerSelf.on('error', function (err) {
-  console.error('Error:', err.message);
-})
-
-handlerSelf.on('push', function (event) {
-  run_cmd('sh', ['./deploy-self.sh'], function(text){ console.log(text) });
-})
-
