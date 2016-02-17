@@ -23,6 +23,11 @@ handler.on('error', function (err) {
 })
 
 handler.on('push', function (event) {
-  console.log(event.payload);
-  run_cmd('sh', ['./deploy-io.sh'], function(text){ console.log(text) });
+  if(event.payload.repository.name == 'deploy') {
+    console.log('deploy');
+    run_cmd('sh', ['./deploy-self.sh'], function(text){ console.log(text) });
+  }else if(event.payload.repository.name == 'congyuandong.github.io') {
+    console.log('congyuandong.github.io');
+    run_cmd('sh', ['./deploy-io.sh'], function(text){ console.log(text) });
+  }
 })
