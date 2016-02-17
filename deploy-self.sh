@@ -1,5 +1,5 @@
 #!/bin/bash
-WEB_PATH='/home/cyd/www/github.io'
+WEB_PATH='/home/cyd/www/deploy'
 WEB_USER='cyd'
 WEB_USERGROUP='cyd'
 
