@@ -11,5 +11,6 @@ git clean -f
 git pull
 git checkout master
 echo "changing permissions..."
+npm install
 sh deploy restart
 echo "Finished"
