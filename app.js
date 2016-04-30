@@ -29,5 +29,7 @@ handler.on('push', function (event) {
     run_cmd('sh', ['./deploy-io.sh'], function(text){ console.log(text) });
   }else if(event.payload.repository.name == 'desktop') {
     run_cmd('sh', ['./deploy-desktop.sh'], function(text){ console.log(text) });
+  }else if(event.payload.repository.name == 'ajx') {
+    run_cmd('sh', ['./ajx.sh'], function(text){ console.log(text) });
   }
 })
